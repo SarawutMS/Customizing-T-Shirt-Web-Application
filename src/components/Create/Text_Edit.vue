@@ -8,23 +8,14 @@
 
                         <div class="modal-header ">
                             <slot name="header">
-
                                 ตัวอักษร
-
-
-
                                 <span @click="showModal = false"><i class="bi bi-x-lg text-warning"></i> </span>
-
-
                             </slot>
                         </div>
-
                         <div class="modal-body ">
                             <slot name="body">
-
                             </slot>
                         </div>
-
                         <div class="modal-footer">
                             <slot name="footer">
 
@@ -35,13 +26,8 @@
                 </div>
             </div>
         </transition>
-
     </div>
-
-
-
 </template>
-  
 <script>
 export default {
     name: "text_edit",
@@ -56,19 +42,15 @@ export default {
 
     },
     mounted() {
-
     },
     methods: {
         increaseCount(n) {
             console.log(n)
             this.count += n
         },
-        
     }
 };
 </script>
-  
-  
 <style scoped>
 /* we will explain what these classes do next! */
 .detail {
@@ -129,11 +111,8 @@ input {
 
     transition: opacity 1s ease;
 }
-
 .modal-wrapper {
     display: table-cell;
-
-
 }
 
 .modal-container {
@@ -147,15 +126,12 @@ input {
     transition: all 0.3s ease;
     font-family: Helvetica, Arial, sans-serif;
 }
-
 .modal-header {
     margin-top: 1%;
     color: #030303;
     font-size: large;
     font-weight: 900;
-
 }
-
 .modal-body {
     margin: 20px 0;
 }

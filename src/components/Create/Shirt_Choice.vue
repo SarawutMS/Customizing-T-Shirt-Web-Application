@@ -65,13 +65,9 @@
                 </div>
             </div>
         </transition>
-
     </div>
 
-
-
 </template>
-  
 <script>
 export default {
     name: "shirt_choice",
@@ -96,8 +92,6 @@ export default {
     }
 };
 </script>
-  
-  
 <style scoped>
 /* we will explain what these classes do next! */
 .detail {
@@ -157,7 +151,6 @@ input {
     display: table;
     transition: opacity 1s ease;
 }
-
 .modal-wrapper {
     display: table-cell;
     vertical-align: middle;
