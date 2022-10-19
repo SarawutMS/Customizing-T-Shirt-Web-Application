@@ -32,10 +32,10 @@
 
                 <div class="border-bottom row  p-2">
                   <div class="col-4">
-                    <label for="Password " class=""><b>รหัสผ่าน</b></label>
+                    <label for="pass " class=""><b>รหัสผ่าน</b></label>
                   </div>
                   <div class="col">
-                    <input v-model="password" type="password" id="Password" name="Password" placeholder="รหัสผ่าน"
+                    <input v-model="password" type="password" id="password" name="password" placeholder="รหัสผ่าน"
                       class="no-outline">
                   </div>
                 </div>
@@ -45,14 +45,14 @@
 
             <div class="modal-footer">
               <slot name="footer">
-                <button class="btn btn-warning " @click="showModal = login()">
+                <button class="btn btn-warning " @click="login()">
                   Login
                 </button>
                 <text>
                   _____________________
                 </text>
                 <text>
-                  _________________
+                  {{log}}
                 </text>
                 <text>
                   _____________________
@@ -84,8 +84,11 @@
 <script>
 import axios from 'axios';
 import { notify } from "@kyvg/vue3-notification";
+import { useCookies } from "vue3-cookies";
+import { emit } from 'process';
 export default {
   name: "login_modal",
+  
   props: {
     showModal: Boolean
   },
@@ -97,6 +100,7 @@ export default {
       state_login: false,
       email: null,
       password: null,
+      log: '____________________',
     }
 
   },
@@ -105,14 +109,6 @@ export default {
 
 
 
-    axios.get('http://localhost:3000/arm_mongo/arm_db')
-      .then(response => {
-        this.db_users = response.data.users;
-
-      })
-      .catch(error => {
-        console.log(error);
-      });
 
 
   },
@@ -120,34 +116,41 @@ export default {
     onClickClose(event) {
       this.$emit('close', { name: 'this.showLogin', state: false })
       this.clear_value()
-
     },
     login(ev) {
-      if (this.db_users[0].username == this.email && this.db_users[0].password == this.password) {
-        this.$root.$emit('success', 1)
-        this.$emit('close', false)
-      } else {
-        notify({
-          type: "error",
-          text: "ไม่สามารถเข้าสู่ระบบกรุณาตรวจสอบ",
+      let data = new FormData();
+      data.append('email', this.email);
+      data.append('pass', this.password);
+      axios.post('http://localhost:3000/services/arm_service/login', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+        .then(response => {
+          if (response.data == "success") {
+            this.log = 'เข้าสู่ระบบเรียบร้อย'
+            this.$root.$emit('onCookies', { email: this.email, pass: this.password });
+          } else {
+
+            this.log = 'อีเมลหรือรหัสผ่านไม่ถูกต้องกรุณาตรวจสอบใหม่'
+          }
+        })
+        .catch(error => {
+          console.log(error);
         });
-        this.$emit('close', { name: 'showLogin', state: false })
-      }
 
 
-      this.clear_value()
+      // this.clear_value()
 
     },
 
     clear_value() {
       this.email = null
       this.password = null
+      this.log = '____________________'
     },
 
-    increaseCount(n) {
-      console.log(n)
-      this.count += n
-    }
+
   }
 };
 </script>
