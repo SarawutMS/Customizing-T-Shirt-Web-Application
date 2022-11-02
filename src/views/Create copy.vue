@@ -1,52 +1,69 @@
 <template>
-    <div class="custom">
-        <div class="container">
-            <h2 class="container">
-                <div class="position-absolute top-50 start-50 translate-middle">
+    <div class="custom px-4">
+        <div class="container border ">
+            <h2 class="container ">
+                <!--  <div class="">
                     <div class="shirt_color "></div>
-                </div>
-
+                </div>-->
                 <i @click="state_shirt = !state_shirt" class="bi" :class="{'bi-front':state_shirt}"></i>
-                <i @click="state_shirt = !state_shirt" class="bi" :class="{ 'bi-back': !state_shirt }"></i>
-
+                <i @click="state_shirt = !state_shirt" class="bi" :class="{'bi-back':!state_shirt}"></i>
+                <!-- 
                 <div v-if="state_shirt">
+                    <div class="">
 
-                    <div class="position-absolute top-50 start-50 translate-middle">
-                        <img id="my-shirt" v-bind:src="this.data" />
+                        <img id="my-shirt" v-bind:src="require('../assets/img/crew_front.png')" />
+
                     </div>
                 </div>
                 <div v-else>
-
-                    <div class="position-absolute top-50 start-50 translate-middle">
-                        <img id="my-shirt" v-bind:src="this.data" />
+                    <div class="">
+                        <img id="my-shirt" v-bind:src="require('../assets/img/crew_back.png')" />
                     </div>
                 </div>
-
+-->
             </h2>
-            <div class="position-absolute top-50 start-0 translate-middle mx-5 mt-5" style="font-size:25px">
+            <!-- :style="{'background-image': 'url(' + require('../assets/img/crew_front.png') + ')'}" 
+                       <img v-bind:src="require('../assets/img/crew_front.png')" class="img" alt="Paris"
+                        style="width:40%" />.
+
+
+                          <img v-bind:src="require('../assets/img/crew_front.png')" class="img" />
+                -->
+
+
+
+            <div id="canvas-container">
+
+                <canvas id="demo" width="250" height="">
+
+
+                </canvas>
+            </div>
+            <text class=" text"> Paintable Area </text>
+            <div>
+            </div>
+
+
+
+            <div class="" style="font-size:25px">
                 <i @click="this.color_shirt = 'rgb(0, 0, 0)'" class="bi bi-circle-fill "
                     style="color:rgb(0, 0, 0);"></i>
                 <br />
-                <i @click="this.color_shirt = 'rgb(255, 255, 255)'" class="bi bi-circle "></i>
+                <i @click="this.color_shirt ='rgb(255, 255, 255)'" class="bi bi-circle "></i>
             </div>
-            <div class="position-absolute top-50 start-50 translate-middle label_pain">
-                <canvas id="demo" height="250" width="125"></canvas>
-                <text> Paintable Area</text>
-            </div>
+
         </div>
-        <nav class="fixed-bottom menubottom text-center bg-white pt-5 ">
+        <nav class="fixed-bottom menubottom text-center bg-white">
             <div class="btn btn-outline-dark bi bi-clipboard-heart " @click="open_shirt = !open_shirt"></div>
             <div class="btn btn-outline-dark bi bi-fonts" @click="Addtext()"></div>
-            <div class="btn btn-outline-dark bi bi-image" @click="popFileSelector()"></div>
-            <div class="btn btn-outline-dark bi bi-sticky" @click="add_stiker()"></div>
-            <div class="btn btn-outline-dark bi bi-check-lg text-warning" @click="save_Button()"></div>
+            <div class="btn btn-outline-dark bi bi-image" @click="saveButton()"></div>
+            <div class="btn btn-outline-dark bi bi-sticky" @click="upload_text()"></div>
+            <div class="btn btn-outline-dark bi bi-check-lg text-warning" @click="Upload_test()"></div>
         </nav>
     </div>
     <div>
 
-        <form>
-            <input type="hidden" id="myfile" name="myfile" v-model="this.data" />
-        </form>
+
     </div>
     <!--  Modal  Line-->
     <Shirt_ChoiceVue :showModal=open_shirt />
@@ -54,7 +71,7 @@
         <template v-slot:body>
             <div class="text-center" v-bind="">
 
-                <h1> <text class="px-1" :style="{ color: font_color, backgroundColor: bg_color }"> {{ show_text }}
+                <h1> <text class="px-1" :style="{ color:font_color,backgroundColor:bg_color }"> {{show_text}}
                     </text>
                 </h1>
 
@@ -95,6 +112,9 @@
                         v-model="bg_color" /><br>
                 </div>
             </div>
+
+
+
         </template>
         <template v-slot:footer>
             <div class="btn btn-success mx-1" @click="Update_text()"> ตกลง </div>
@@ -102,28 +122,17 @@
             <div class="btn btn-danger mx-1 text-white" @click="Obj_delete"> ลบ </div>
         </template>
 
-        <div class="static" :class="{
-            active: isActive,
-            'text-danger': hasError
-        }">
+        <div class="static" :class="{ active: isActive,
+        'text-danger': hasError }">
             ssd
         </div>
     </Text_Edit>
-
-    <form>
-
-        <input type="file" @change="handleFiles" id="fileElem" multiple accept="image/*" style="display:none" />
-    </form>
 </template>
 <script scope>
 import { fabric } from 'fabric'
 import Shirt_ChoiceVue from '@/components/Create/Shirt_Choice.vue';
 import Text_Edit from '@/components/Create/Text_Edit.vue';
 import axios from 'axios';
-
-
-var FormData = require('form-data');
-
 let canvas = null
 const del = () => {
     canvas.getActiveObjects().forEach((obj) => {
@@ -131,18 +140,12 @@ const del = () => {
     });
     canvas.discardActiveObject().renderAll()
 }
-
-const stoDataURL = url => fetch(url)
-    .then(response => response.blob())
-    .then(blob => new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.onloadend = () => resolve(reader.result)
-        reader.onerror = reject
-        reader.readAsDataURL(blob)
-    }))
-
-
-
+function base64_encode(file) {
+    // read binary data
+    var bitmap = fs.readFileSync(file);
+    // convert binary data to base64 encoded string
+    return new Buffer(bitmap).toString('base64');
+}
 
 
 export default {
@@ -167,25 +170,31 @@ export default {
             bg_color: "",
             position: { left: "", top: "" }
             ,
-            data: require('../assets/img/crew_front.png'),
-            send: "",
+
             isActive: true,
             hasError: true,
-
-            canvas_e: null,
-
-            img: [],
         }
 
     },
     mounted() {
 
+
         canvas = new fabric.Canvas("demo");
+
         var imageURL = require('../assets/img/crew_front.png');
+
+
         var image = new Image()
         image.src = require('../assets/img/crew_front.png');
 
         canvas.on('mouse:down', this.Mouse_d_HavehoverCorsor);
+
+        image.onLoad = function () {
+
+        };
+
+
+
 
 
         canvas.on('mouse:dblclick', function (obj) {
@@ -199,92 +208,10 @@ export default {
 
     },
     methods: {
-        handleFiles(event) {
-            var data = event.target.files[0]
-            console.log(event.target.files)
-            var reader = new FileReader();
-            reader.readAsDataURL(data);
-            reader.onload = (e) => {
-                fabric.Image.fromURL(e.target.result, (img) => {
-                    img.scaleToWidth(60);
-                    img.scaleToHeight(60);
-                    img.set({ 'left': 20 });
-                    img.set({ 'top': 20 });
-                    canvas.add(img).renderAll().setActiveObject(img);
-                });
-            }
-
-        },
-        popFileSelector() {
-            var el = document.getElementById("fileElem");
-            if (el) {
-                el.click()
 
 
-            }
-        },
+    
 
-        add_stiker() {
-            let token = "JAfreOCefsj3bMqD6usegzhajzzh4sGYGc8Sp4fG"
-            axios.get(`https://search.icons8.com/api/iconsets/v5/search?term=cart&token=${token}`)
-                .then(response => {
-                    console.log(response.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        },
-        save_Button() {
-            let datas = new FormData();
-            const test = require('../assets/dd.jpg')
-            let sen = canvas.toDataURL({
-                format: 'png',
-            });
-            let tes = canvas.toSVG();
-
-
-            datas.append('fileuploads', sen);
-            datas.append('svg', tes);
-            datas.append('name', this.$cookies.get('email'));
-            datas.append('count', '1');
-            axios.post('http://localhost:3000/services/arm_service/upload',
-                datas,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
-                .then(response => {
-                    console.log(response.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        },
-
-        imporT_() {
-            const test = require('../assets/dd.jpg')
-            console.log(this.canvas_e.toDataURL());
-            //for image out side canvas;
-            stoDataURL(this.canvas_e.toDataURL())
-                .then(dataUrl => {
-                    let datas = new FormData();
-                    datas.append('fileuploads', dataUrl);
-                    axios.post('http://localhost:3000/services/arm_service/upload',
-                        datas,
-                        {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-                        })
-                        .then(response => {
-                            console.log(response.data);
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        });
-                })
-        },
         upload_text() {
             var body = {
                 userName: 'Fred',
@@ -304,6 +231,21 @@ export default {
                 });
         },
 
+
+
+
+        Upload_test() {
+
+            const data = require('../assets/img/crew_front.png');
+
+            console.log(data);
+
+
+
+
+
+
+        },
 
 
         Mouse_d_HavehoverCorsor(obj) {

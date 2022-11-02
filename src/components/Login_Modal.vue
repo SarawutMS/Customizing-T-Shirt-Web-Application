@@ -84,17 +84,20 @@
 <script>
 import axios from 'axios';
 import { notify } from "@kyvg/vue3-notification";
-import { useCookies } from "vue3-cookies";
+
 import { emit } from 'process';
 export default {
   name: "login_modal",
-  
+
   props: {
     showModal: Boolean
   },
 
   data() {
     return {
+      
+      
+      localhost: window.location.host,
       db_users: [],
       count: 0,
       state_login: false,
@@ -113,6 +116,8 @@ export default {
 
   },
   methods: {
+
+
     onClickClose(event) {
       this.$emit('close', { name: 'this.showLogin', state: false })
       this.clear_value()
@@ -121,7 +126,7 @@ export default {
       let data = new FormData();
       data.append('email', this.email);
       data.append('pass', this.password);
-      axios.post('http://localhost:3000/services/arm_service/login', data, {
+      axios.post(`http://${this.localhost}/services/arm_service/login`, data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -129,7 +134,14 @@ export default {
         .then(response => {
           if (response.data == "success") {
             this.log = 'เข้าสู่ระบบเรียบร้อย'
-            this.$root.$emit('onCookies', { email: this.email, pass: this.password });
+
+
+        
+
+            this.$cookies.set("email", this.email, '24h');
+            this.$cookies.set("password", this.password, '24h');
+            this.$emit('login');
+            this.$emit('close');
           } else {
 
             this.log = 'อีเมลหรือรหัสผ่านไม่ถูกต้องกรุณาตรวจสอบใหม่'

@@ -11,7 +11,8 @@
 
                                 ชำระเงิน/หลักฐาน
 
-                                <span @click="showModal = false"><i class="bi bi-x-lg text-warning"></i> </span>
+                                <span @click="showModal = onClickClose()"><i class="bi bi-x-lg text-warning"></i>
+                                </span>
 
 
                             </slot>
@@ -84,6 +85,12 @@ export default {
 
     },
     methods: {
+
+        onClickClose(event) {
+
+            this.$emit('close', { name: 'Payment_Modal', state: false })
+            return false;
+        },
         increaseCount(n) {
             console.log(n)
             this.count += n
@@ -123,7 +130,7 @@ input {
     background-color: #ffc107 !important;
     color: rgb(0, 0, 0) !important;
     width: 100%;
-    
+
     position: absolute !important;
     bottom: 50px
 }
@@ -132,7 +139,7 @@ input {
     background-color: #ffc107 !important;
     color: rgb(0, 0, 0) !important;
     width: 100% !important;
- 
+
     position: absolute !important;
     bottom: 1px
 }
@@ -181,8 +188,6 @@ input {
 .modal-default-button {
     float: right;
 }
-
-
 .modal-enter {
     opacity: 0;
 }
@@ -190,10 +195,34 @@ input {
 .modal-leave-active {
     opacity: 0;
 }
-
 .modal-enter .modal-container,
 .modal-leave-active .modal-container {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
+}
+@media (min-width: 600px) {
+    .modal-mask {
+        position: fixed;
+        z-index: 9998;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: table;
+        transition: opacity 1s ease;
+    }
+
+    .modal-container {
+        width: 30%;
+        height: 80%;
+        margin: 0px auto;
+        padding: 20px 30px;
+        background-color: #fff;
+        border-radius: 2px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+        transition: all 0.3s ease;
+        font-family: Helvetica, Arial, sans-serif;
+    }
 }
 </style>

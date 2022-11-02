@@ -3,73 +3,73 @@
         <h4 class="text-danger text-decoration-line-through"> แก้ไข </h4>
 
         <div class="row">
-            <label for="staticEmail" class="col-sm-2 col-form-label"> <b> Email </b></label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-4 col-form-labell"> <b> Email </b></label>
+            <div class="col">
                 <input type="text" class="form-control-plaintext" id="staticEmail" placeholder="Email">
             </div>
         </div>
         <hr>
         <div class="row">
-            <label for="inputPassword" class="col-sm-2 col-form-label"> <b> รหัสผ่าน </b></label>
-            <div class="col-sm-10">
+            <label for="inputPassword" class="col-4 col-form-labell"> <b> รหัสผ่าน </b></label>
+            <div class="col">
                 <input type="password" class="form-control-plaintext" id="inputPassword" placeholder="รหัสผ่าน">
             </div>
         </div>
         <hr>
         <div class="row">
-            <label for="staticEmail" class="col-sm-2 col-form-label"> <b> ชื่อ </b></label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-4 col-form-labell"> <b> ชื่อ </b></label>
+            <div class="col">
                 <input type="text" class="form-control-plaintext" id="name" placeholder="ชื่อ">
             </div>
         </div>
         <hr>
         <div class="row">
-            <label for="staticEmail" class="col-sm-2 col-form-label"> <b> นามสกุล </b></label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-4 col-form-labell"> <b> นามสกุล </b></label>
+            <div class="col">
                 <input type="text" class="form-control-plaintext" id="lastname" placeholder="นามสกุล">
             </div>
         </div>
         <hr>
         <div class="row">
-            <label for="staticEmail" class="col-sm-2 col-form-label"> <b> ชื่อที่แสดง </b></label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-4 col-form-labell"> <b> ชื่อที่แสดง </b></label>
+            <div class="col">
                 <input type="text" class="form-control-plaintext" id="name_display" placeholder="ชื่อที่แสดง">
             </div>
         </div>
         <hr>
         <div class="row">
-            <label for="staticEmail" class="col-sm-2 col-form-label"> <b> รายละเอียด </b></label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-4 col-form-labell"> <b> รายละเอียด </b></label>
+            <div class="col">
                 <input type="text" class="form-control-plaintext" id="detail" placeholder="รายละเอียด">
             </div>
         </div>
         <hr>
         <div class="row">
-            <label for="staticEmail" class="col-sm-2 col-form-label"> <b> ลิงค์ </b></label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-4 col-form-labell"> <b> ลิงค์ </b></label>
+            <div class="col">
                 <input type="text" class="form-control-plaintext" id="link_navigator" placeholder="ลิงค์">
             </div>
         </div>
         <hr>
         <div class="row">
-            <label for="staticEmail" class="col-sm-2 col-form-label"> <b> เบอร์มือถือ </b></label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-4 col-form-labell"> <b> เบอร์มือถือ </b></label>
+            <div class="col">
                 <input type="text" class="form-control-plaintext" id="phone_number" placeholder="เบอร์มือถือ">
             </div>
         </div>
         
         <hr>
         <div class="row">
-            <label for="staticEmail" class="col-sm-2 col-form-label"> <b> ไลน์ไอดี </b></label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-4 col-form-labell"> <b> ไลน์ไอดี </b></label>
+            <div class="col">
                 <input type="text" class="form-control-plaintext" id="id_line" placeholder="ไลน์ไอดี">
             </div>
         </div>
         
         <hr>
         <div class="row">
-            <label for="staticEmail" class="col-sm-2 col-form-label"> <b> ที่อยู่ </b></label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-4 col-form-labell"> <b> ที่อยู่ </b></label>
+            <div class="col">
                 <input type="text" class="form-control-plaintext" id="address" placeholder="ที่อยู่">
             </div>
         </div>

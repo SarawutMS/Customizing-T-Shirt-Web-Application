@@ -13,7 +13,7 @@
 
 
 
-                                <span @click="showModal = false"><i class="bi bi-x-lg text-warning"></i> </span>
+                                <span @click="showModal =  onClickClose()"><i class="bi bi-x-lg text-warning"></i> </span>
 
 
                             </slot>
@@ -47,7 +47,7 @@
                                             <img src="../../assets/img/mens_tank_front.png" width="80" />
                                             <img src="../../assets/img/mens_tank_back.png" width="80" />
                                             <br>
-                                            <small> เสื้อกล้าม </small>
+                                            <small> เสื้อแขนสั้น </small>
                                         </div>
 
                                     </div>
@@ -65,9 +65,13 @@
                 </div>
             </div>
         </transition>
+
     </div>
 
+
+
 </template>
+  
 <script>
 export default {
     name: "shirt_choice",
@@ -85,13 +89,17 @@ export default {
 
     },
     methods: {
-        increaseCount(n) {
-            console.log(n)
-            this.count += n
-        }
+
+        onClickClose(event) {
+
+            this.$emit('close', { name: 'this.showLogin', state: false })
+            return false;
+        },
     }
 };
 </script>
+  
+  
 <style scoped>
 /* we will explain what these classes do next! */
 .detail {
@@ -151,6 +159,7 @@ input {
     display: table;
     transition: opacity 1s ease;
 }
+
 .modal-wrapper {
     display: table-cell;
     vertical-align: middle;

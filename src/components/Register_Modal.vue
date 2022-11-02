@@ -138,7 +138,8 @@ export default {
 
   data() {
     return {
-
+      localhost: 'localhost',
+      localhosts: '103.174.191.75',
       errors: [],
       email: null,
       name: null,
@@ -249,7 +250,7 @@ export default {
         data.append('name', this.name);
         data.append('last_name', this.last_name);
         data.append('pass', this.pass);
-        axios.post('http://localhost:3000/services/arm_service/register', data, {
+        axios.post(`http://${this.localhost}:3000/services/arm_service/register`, data, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }

@@ -3,61 +3,34 @@
     <div v-if="showModal">
         <transition name="modal">
             <div class="modal-mask">
-                <div class="modal-wrapper">
-                    <div class="modal-container">
 
-                        <div class="modal-header ">
+                <div class="modal-wrapper">
+
+                    <div class="modal-container ">
+
+                        <div class="modal-header bg-warning p-3 shadow">
                             <slot name="header">
 
-                                ตะกร้าสินค้า
-
-                                <span @click="showModal = false"><i class="bi bi-x-lg text-warning"></i>
-                                </span>
-
-
+                                <div class="center  text-white">
+                                    คุณต้องการออกจากระบบ
+                                </div>
                             </slot>
                         </div>
 
                         <div class="modal-body ">
                             <slot name="body">
-                                <!-- img -->
 
-                                <div>
-                                    <div class="border " style=" padding:100px 25px 75px 100px;"></div>
-
-                                </div>
-
-
-
-                                <div class="detail mt-5 border">
-                                    <text class="">
-                                        <b> รายการที่เลือก </b>
-
-                                    </text>
-
-                                </div>
-                                <div class="row">
-
-                                    <b class="col"> Total </b>
-                                    <span class="col text-end mx-2"> 0 <small>THB</small></span>
-                                </div>
-
-
+                                !คุณต้องการทำรายการออกจากระบบ
                             </slot>
                         </div>
 
                         <div class="modal-footer">
                             <slot name="footer">
 
+                                <div class="btn btn-outline-secondary mx-2" @click="onClickClose">ยกเลิก</div>
 
-                                <button class="btn btn-confirm" @click="showModal = false">
-                                    ยืนยันรายการสั่งซื้อ
-                                </button>
+                                <div class="btn btn-outline-warning" @click="onConfirm">ออกจากระบบ</div>
 
-
-                                <button class="btn btn-another" @click="showModal = false">
-                                    เลือกสินค้าเพิ่มเติม
-                                </button>
 
                             </slot>
 
@@ -72,42 +45,62 @@
 
 
 </template>
-  
+    
 <script>
+import axios from 'axios';
+
 export default {
-    name: "cart_modal",
+    name: "logout_modal",
+
     props: {
         showModal: Boolean
     },
 
     data() {
         return {
-            count: 0
+            localhost: 'localhost',
+            localhosts: '103.174.191.75',
+            db_users: [],
+            count: 0,
+            state_login: false,
+            email: null,
+            password: null,
+            log: '____________________',
         }
 
     },
     mounted() {
 
+
+
+
+
+
     },
     methods: {
-
-        onClickClose(event) {
-            this.$emit('close', { name: 'Payment_Modal', state: false })
-
-            return false;
+        clear_value() {
+            this.email = null
+            this.password = null
+            this.log = '____________________'
         },
+        onClickClose(ev) {
+            this.$emit('close', { name: 'this.showLogOut', state: false })
+            this.clear_value()
+        },
+
+        onConfirm(ev) {
+            this.$cookies.remove("email");
+            this.$cookies.remove("password");
+            this.$emit('logOut')
+        }
 
     }
 };
 </script>
-  <link rel="stylesheet" href="../assets/css/modal_css.css" /> 
-  
+    
+    
 <style scoped>
 /* we will explain what these classes do next! */
-.detail {
-    height: 150px;
-}
-
 input {
     border-top-style: hidden;
     border-right-style: hidden;
@@ -123,28 +116,12 @@ input {
 }
 
 .modal-footer {
-    margin-top: 20%;
-    height: 10%;
-    position: relative !important;
-}
 
-.btn-another {
-    background-color: #181818 !important;
-    color: rgb(255, 255, 255) !important;
-    width: 100%;
-    position: absolute !important;
-    bottom: 1px;
-}
-
-.btn-confirm {
-    background-color: #ffc107 !important;
-    color: rgb(0, 0, 0) !important;
-    width: 100% !important;
-
-    position: absolute !important;
-    bottom: 50px;
+    padding: 10px;
 
 }
+
+
 
 .modal-mask {
     position: fixed;
@@ -164,10 +141,10 @@ input {
 }
 
 .modal-container {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 30%;
     margin: 0px auto;
-    padding: 20px 30px;
+
     background-color: #fff;
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -176,15 +153,22 @@ input {
 }
 
 .modal-header {
-    margin-top: 2%;
+    margin-top: 5%;
+
     color: #030303;
     font-size: large;
     font-weight: 900;
 
 }
 
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .modal-body {
-    margin: 20px 0;
+    margin: 30px 20px 10px 20px;
 }
 
 .modal-default-button {

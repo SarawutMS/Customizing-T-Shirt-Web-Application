@@ -3,21 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@caohenghu/vue-colorpicker": "^1.2.4",
+    "@kyvg/vue3-notification": "^2.4.1",
+    "axios": "^0.27.2",
     "bootstrap": "^5.2.1",
     "bootstrap-icons": "^1.9.1",
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.8.3",
     "fabric": "^5.2.4",
+    "form-data": "^4.0.0",
+    "fs": "^0.0.1-security",
     "material-design-icons-iconfont": "^6.7.0",
+    "path": "^0.12.7",
     "vue": "^3.2.39",
+    "vue-cookies": "^1.8.1",
     "vue-fabric-wrapper": "^0.3.71",
     "vue-router": "^4.0.3",
+    "vue-toastification": "^2.0.0-rc.5",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
