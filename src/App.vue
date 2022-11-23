@@ -19,7 +19,7 @@
 import Navigation from './components/Navigation.vue';
 import Menubar from './components/Menubar.vue';
 import Login_Modal from './components/Login_Modal.vue';
-
+import axios from 'axios';
 import { notify } from "@kyvg/vue3-notification";
 
 
@@ -36,7 +36,7 @@ export default {
     //this.cookies.set("myCoookie", "abcdefg");
 
 
-   
+    console.log(this.$cookies.get('email'))
 
   }, methods: {
 
@@ -50,10 +50,11 @@ export default {
         text: "เข้าสู่ระบบสำเร็จ",
       });
 
-     
+      console.log(ev);
     },
     onCookies(ev) {
     
+      console.log(this.cookies);
     }
   },
   components: {
@@ -70,14 +71,14 @@ export default {
 
 
 
-<style lang="scss" scoped>
+<style lang="scss" >
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap");
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Inter, serif;
+  font-family: Georgia, serif;
   font-weight: 400;
 }
 

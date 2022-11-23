@@ -1,264 +1,152 @@
 <template>
   <div class="home container">
 
+
+
     <div class="d-flex justify-content-center main_product">
-      <img src="../assets/marketplace.jpg" style="width: 320px;height: 150px;">
+
+
       <!-- img <div class="border border-5" style="width: 800px;height: 400px;"></div> -->
+      <div class="border border-5" style="width: 320px;height: 150px;"></div>
 
+    </div>
+
+    <div class="container mt-3">
+      <h5>
+        <b>
+          Products
+        </b>
+      </h5>
+      <hr>
+      <div class="row product">
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;">
+          </div>
+        </div>
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;">
+       
+          </div>
+        </div>
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;"></div>
+        </div>   
+      </div>
     </div>
 
 
     <div class="container mt-3">
-
-      <h5 class="row">
-        <b class="col"> Product </b>
-        <router-link class="col-2 text-dark" :to="{ name: 'Gallery' }">
-          <i class="bi  bi-grid-3x2-gap col-2"></i>
-        </router-link>
-      </h5>
-      <hr>
-      <Shirt_Component v-if="showM.bol" v-model:data_="data[showM.num]" v-model:showModals='showM' pages="onther"
-        @close="showM.bol = false" />
-      <carousel :items-to-show="3.5" :wrapAround="true" v-if="data.length">
-        <slide v-for="item of  data.length " :key="item">
-          <div @click="Show(item, '')">
-            <Shirt_Component :data_='data[item - 1]' :pages="'Modal'" />
-          </div>
-        </slide>
-      </carousel>
-
-      <!-- 
-    -->
-
-      <div class="row">
-        <div class="col-4 d-flex"> <i class="bi  bi-arrow-left"></i></div>
-        <div class="col-4"></div>
-        <div class="col-4  d-flex flex-row-reverse"> <i class="bi  bi-arrow-right"></i> </div>
-      </div>
-
-
-    </div>
-
-
-    <div class="container mt-3">
-
-      <h5 class="row">
-        <b class="col"> Featured Creators </b>
+      <h5>
+        <b> Featured Creators </b>
 
       </h5>
       <hr>
-
-
-      <div v-for="cards in data_users" :key="cards" class="row  mb-2 card " @click="Profile_nav(cards)">
-        <div class="col-12 ">
-
-          }
-          <carousel :items-to-show="1.5" :autoplay="Randdom()" :wrapAround="true">
-            <slide v-for="(slide, index, value) of 3" :key="slide">
-              <div class="parent p-2">
-                {{ cards._id }}
-                <img class="child" v-bind:src="this.img" />
-                <img v-bind:src="this.img" style="width: 100%;">
-              </div>
-
-            </slide>
-          </carousel>
-
-          <h5 class="text-secondary col-6 border-bottom text-center" style="width: 100%;"><b>{{ cards.name }} </b> </h5>
+      <div class="row creator mb-5">
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;"></div>
         </div>
-        <div class="px-4 p-3">
-          <div class="col-12 row">
-            <small class="text-secondary col-5"><b> ผู้ออกแบบ </b> </small>
-            <small class="text-secondary col"> {{ cards.name }} </small>
-          </div>
-          <div class="col-12 row ">
-            <small class="text-secondary col-5"><b> Email </b> </small>
-            <small class="text-secondary col"> {{ cards.email }} </small>
-          </div>
-          <div class="col-12 row ">
-            <small class="text-secondary col-5"><b> วันที่ </b> </small>
-            <small class="text-secondary col"> 01/10/1999 </small>
-          </div>
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;"></div>
         </div>
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;"></div>
+        </div>
+      
       </div>
-
-
-
-
-
-
-      <div style="margin-bottom:20%"> </div>
     </div>
 
 
   </div>
-
-
-  <div id="my-flicking" class="flicking-viewport">
-    <div class="flicking-camera">
-      <div class="panel"></div>
-      <div class="panel"></div>
-      <div class="panel"></div>
-    </div>
-  </div>
-
-
 </template>
 
-<script >
-import Shirt_Component from '@/components/Menu_bar/Shirt_Component.vue';
-import Cart_Modal from '@/components/Payment/Cart_modal.vue';
-import axios from 'axios';
-import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+
+
+
+
+<!--  
+
+
+    <div class="container m-5">
+      <h4>
+        <b>
+          Products
+        </b>
+      </h4>
+      <hr>
+      <div class="row product">
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;">
+            <div class="mdiv">
+              <div class="md"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;"></div>
+        </div>
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;"></div>
+        </div>
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;"></div>
+
+        </div>
+        <div class="col">
+          <div class="border border-5 border border-5-3" style="width: 85px;height: 85px;">
+
+            <div class="mdiv">
+              <div class="md"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container m-5">
+      <h4>
+        <b> Featured Creators </b>
+
+      </h4>
+      <hr>
+      <div class="row creator">
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;"></div>
+        </div>
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;"></div>
+        </div>
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;"></div>
+        </div>
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;"></div>
+
+        </div>
+        <div class="col">
+          <div class="border border-5" style="width: 85px;height: 85px;">
+            <div class="mdiv">
+              <div class="md"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+-->
+<script>
+// @ is an alias to /src
+
 export default {
   name: "Home",
-  components: {
-    Cart_Modal,
-    Shirt_Component,
-    Carousel,
-    Slide,
-    Pagination,
-    Navigation,
-  },
-  data() {
-    return {
-      data_users: [],
-      data: [],
-      cards_id: '',
-      keySlide: 0,
-      showM: { 'bol': false, 'num': 0 },
-      items_advance_modal: [],
-      img: [],
-    }
-  },
-  computed: {
-
-
-    Test() {
-
-      if (this.showM == true) {
-        return true;
-      } else {
-        return false;
-      }
-
-
-    },
-    Value() {
-
-      let test = "sadsad";
-      setTimeout(() => {
-        test = "this.data[0]._id";
-
-      }, 1000)
-      setTimeout(1)
-      return test
-
-    },
-
-    keySlide_() {
-      setTimeout(() => {
-
-      }, 1000)
-
-      setTimeout('');
-
-
-
-    }
-
-  },
-  async mounted() {
-    await axios.get(`http://localhost:3000/services/arm_service/shirts/home`)
-      .then(response => {
-        this.data = response.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-    await axios.get(`http://localhost:3000/services/arm_service/users`)
-      .then(response => {
-        this.data_users = response.data;
-
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-
-
-  },
-  methods: {
-    front_canvas(ev) {
-      let permission = true;
-      axios.get(`http://localhost:3000/services/arm_service/own_shirts/${ev}/${permission}`)
-        .then(response => {
-          this.img = response.data;
-          
-        })
-        .catch(error => {
-          console.log(error);
-        }); 
-      return ev;
-    },
-    SlideImage(ev) {
-      console.log(ev)
-
-      let permission = true;
-
-      this.img = ev._id
-
-      /*axios.get(`http://localhost:3000/services/arm_service/own_shirts/${ev}/${permission}`)
-        .then(response => {
-          this.img = response.data;
-          console.log(this.img)
-        })
-        .catch(error => {
-          console.log(error);
-        }); */
-
-    },
-    Profile_nav(ev) {
-      this.$router.push({ name: 'Store', params: { id: ev._id } })
-    },
-    Show(slide, type) {
-      this.showM.bol = true;
-      this.showM.num = slide - 1;
-    },
-    Randdom(ev) {
-
-      //this.items_advance_modal.push(ev);
-      //console.log(this.items_advance_modal)
-      var items = Array(4000, 6000, 5000);
-
-      var item = items[Math.floor(Math.random() * items.length)]
-      return item;
-    },
-    dataRespone(rep) {
-      console.log(rep)
-    }
-
-  },
+  components: {},
 };
 </script>
 
 <style lang="scss" scoped>
-.parent {
-  position: relative;
-}
-
-.child {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40%;
-  height: 70%;
-  text-align: center;
-}
-
 .main_product {
   .border {
     background-color: rgb(201, 201, 201);
@@ -266,7 +154,11 @@ export default {
 
 }
 
-
+.product {
+  .border {
+    background-color: rgb(201, 201, 201);
+  }
+}
 
 .creator {
   .border {
@@ -299,7 +191,7 @@ export default {
 }
 
 .hero {
-
+  background-image: url("../assets/hero-bg.jpg");
   background-attachment: fixed;
   position: relative;
   height: 100vh;
@@ -344,47 +236,5 @@ export default {
       margin-top: 16px;
     }
   }
-}
-
-
-
-.carousel__slide {
-  padding: 5px;
-}
-
-.carousel__viewport {
-  perspective: 2000px;
-}
-
-.carousel__track {
-  transform-style: preserve-3d;
-}
-
-.carousel__slide--sliding {
-  transition: 0.5s;
-}
-
-.carousel__slide {
-  opacity: 0.9;
-  transform: rotateY(-20deg) scale(0.9);
-}
-
-.carousel__slide--active~.carousel__slide {
-  transform: rotateY(20deg) scale(0.9);
-}
-
-.carousel__slide--prev {
-  opacity: 1;
-  transform: rotateY(-10deg) scale(0.95);
-}
-
-.carousel__slide--next {
-  opacity: 1;
-  transform: rotateY(10deg) scale(0.95);
-}
-
-.carousel__slide--active {
-  opacity: 1;
-  transform: rotateY(0) scale(1.1);
 }
 </style>

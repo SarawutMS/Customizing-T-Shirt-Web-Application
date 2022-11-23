@@ -1,9 +1,7 @@
 <template>
 
-
-    <transition name="modal">
-        <div v-if="showModal">
-
+    <div v-if="showModal">
+        <transition name="modal">
             <div class="modal-mask">
                 <div class="modal-wrapper">
                     <div class="modal-container">
@@ -15,8 +13,7 @@
 
 
 
-                                <span @click="showModal = onClickClose()"><i class="bi bi-x-lg text-warning"></i>
-                                </span>
+                                <span @click="showModal =  onClickClose()"><i class="bi bi-x-lg text-warning"></i> </span>
 
 
                             </slot>
@@ -24,11 +21,9 @@
 
                         <div class="modal-body ">
                             <slot name="body">
-
                                 <div class="row my-2 ">
-                                    <div class="col border" @click="Choice_(`crew_`)"
-                                        :class="[Active_type(`crew_`) ? 'shirt_choice' : '']">
-                                        <div class=" p-2 text-center  ">
+                                    <div class="col ">
+                                        <div class=" p-2 text-center  shirt_choice">
                                             <img src="../../assets/img/crew_front.png" width="80" />
                                             <img src="../../assets/img/crew_back.png" width="80" />
                                             <br>
@@ -37,9 +32,8 @@
                                     </div>
                                 </div>
                                 <div class="row my-2">
-                                    <div class="col border" @click="Choice_(`womens_crew_`)"
-                                        :class="[Active_type(`womens_crew_`) ? 'shirt_choice' : '']">
-                                        <div class=" p-2 text-center ">
+                                    <div class="col">
+                                        <div class=" p-2 text-center shirt_choice">
                                             <img src="../../assets/img/womens_crew_front.png" width="80" />
                                             <img src="../../assets/img/womens_crew_back.png" width="80" />
                                             <br>
@@ -48,13 +42,12 @@
                                     </div>
                                 </div>
                                 <div class="row my-2">
-                                    <div class="col border" @click="Choice_(`mens_tank_`)"
-                                        :class="[Active_type(`mens_tank_`) ? 'shirt_choice' : '']">
-                                        <div class=" p-2 text-center ">
+                                    <div class="col">
+                                        <div class=" p-2 text-center shirt_choice">
                                             <img src="../../assets/img/mens_tank_front.png" width="80" />
                                             <img src="../../assets/img/mens_tank_back.png" width="80" />
                                             <br>
-                                            <small> เสื้อกล้าม </small>
+                                            <small> เสื้อแขนสั้น </small>
                                         </div>
 
                                     </div>
@@ -71,15 +64,11 @@
                     </div>
                 </div>
             </div>
+        </transition>
 
-
-        </div>
-
-    </transition>
-
-    <div class="col btn btn-outline-secondary">
-        <div class=" bi bi-clipboard-heart  p-3" @click="showModal = !showModal"></div>
     </div>
+
+
 
 </template>
   
@@ -87,46 +76,20 @@
 export default {
     name: "shirt_choice",
     props: {
-        type: Boolean
+        showModal: Boolean
     },
 
     data() {
         return {
-            count: 0,
-            showModal: false,
-            shirt: null,
-            type_shirt: null,
+            count: 0
         }
 
     },
-    computed: {
-
-
-    },
-
     mounted() {
-        this.type_shirt = this.type
 
     },
     methods: {
-        Active_type(obj) {
 
-            if (this.type_shirt == obj) {
-                return true
-            }
-
-
-        },
-
-
-
-        Choice_(obj) {
-
-            this.type_shirt = obj
-            this.showModal = !this.showModal
-            this.$emit(`Choice_Shirt`, { type: obj })
-
-        },
         onClickClose(event) {
 
             this.$emit('close', { name: 'this.showLogin', state: false })
@@ -143,13 +106,8 @@ export default {
     height: 200px;
 }
 
-
-.shirt_choice {
-    border: 1.5px solid #ffc000 !important;
-}
-
 .shirt_choice:hover {
-    border: 1px solid #ffc000;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 input {
@@ -181,6 +139,14 @@ input {
     bottom: 50px
 }
 
+.btn-confirm {
+    background-color: #ffc107 !important;
+    color: rgb(0, 0, 0) !important;
+    width: 100% !important;
+
+    position: absolute !important;
+    bottom: 1px
+}
 
 .modal-mask {
     position: fixed;
@@ -201,7 +167,7 @@ input {
 
 .modal-container {
     width: 90%;
-    height: 80%;
+    height: 75%;
     margin: 0px auto;
     padding: 20px 30px;
     background-color: #fff;
