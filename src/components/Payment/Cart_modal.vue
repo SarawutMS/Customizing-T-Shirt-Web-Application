@@ -1,7 +1,8 @@
 <template>
 
-    <div v-if="showModal">
-        <transition name="modal">
+
+    <Transition name="modal" appear>
+        <div v-if="showModal">
             <div class="modal-mask">
                 <div class="modal-wrapper">
                     <div class="modal-container">
@@ -50,7 +51,7 @@
                             <slot name="footer">
 
 
-                                <button class="btn btn-confirm" @click="showModal = false">
+                                <button class="btn btn-confirm" @click="test">
                                     ยืนยันรายการสั่งซื้อ
                                 </button>
 
@@ -65,9 +66,10 @@
                     </div>
                 </div>
             </div>
-        </transition>
+        </div>
+    </Transition>
 
-    </div>
+
 
 
 
@@ -96,7 +98,9 @@ export default {
 
             return false;
         },
-
+        test(ev) {
+            console.log(this.$cookies.get('email'))
+        },
     }
 };
 </script>
@@ -175,6 +179,8 @@ input {
     font-family: Helvetica, Arial, sans-serif;
 }
 
+
+
 .modal-header {
     margin-top: 2%;
     color: #030303;
@@ -187,24 +193,19 @@ input {
     margin: 20px 0;
 }
 
-.modal-default-button {
-    float: right;
-}
 
-
-.modal-enter {
-    opacity: 0;
-}
-
+.modal-enter-active,
 .modal-leave-active {
+    transition: opacity 0.08s ease;
+}
+
+
+.modal-enter-from,
+.modal-leave-to {
     opacity: 0;
 }
 
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-}
+
 
 
 @media (min-width: 600px) {

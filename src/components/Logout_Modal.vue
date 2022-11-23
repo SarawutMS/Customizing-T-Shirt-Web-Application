@@ -1,7 +1,7 @@
 <template>
+    <transition name="modal">
+        <div v-if="showModal">
 
-    <div v-if="showModal">
-        <transition name="modal">
             <div class="modal-mask">
 
                 <div class="modal-wrapper">
@@ -38,9 +38,10 @@
                     </div>
                 </div>
             </div>
-        </transition>
+        </div>
+    </transition>
 
-    </div>
+
 
 
 
@@ -91,6 +92,7 @@ export default {
         onConfirm(ev) {
             this.$cookies.remove("email");
             this.$cookies.remove("password");
+            this.$cookies.remove("_id");
             this.$emit('logOut')
         }
 
@@ -184,10 +186,15 @@ input {
     opacity: 0;
 }
 
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+.modal-enter-active,
+.modal-leave-active {
+    transition: opacity 0.01s ease;
+}
+
+
+.modal-enter-from,
+.modal-leave-to {
+    opacity: 0;
 }
 
 
