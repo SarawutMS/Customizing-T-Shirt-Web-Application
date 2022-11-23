@@ -5,93 +5,105 @@
         <div id="mySidebar" class="sidebar" v-if="Menu_show">
             <a href="javascript:void(0)" class="closebtn" @click="EndNav()">×</a>
             <div class="backgroud">
-                <router-link class="link bg-warning shadow" :to="{name: 'Home'}" @click="CloseNave()">
-                    <b>หน้าแรก </b>
-                    <span class="position-absolute end-0 me-3"> <i class="bi bi-chevron-right ps-5 text-end "></i>
-                    </span>
-                </router-link>
-                <router-link class="link" :to="{name: 'Create'}" @click="CloseNave()"><b> ออกแบบเสื้อ </b> <span
-                        class="position-absolute end-0 me-3"> <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
-                </router-link>
-
-                <router-link class="link" :to="{name: ''}" @click="CloseNave()"><b> Design Gallery </b> <span
-                        class="position-absolute end-0 me-3"> <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
-                </router-link>
-
-                <router-link class="link" :to="{name: ''}" @click="showPayment = !showPayment"><b>วิธีการชำระเงิน </b>
-                    <span class="position-absolute end-0 me-3"> <i class="bi bi-chevron-right ps-5 text-end"></i>
-                    </span>
-                </router-link>
-
-
-                <div v-if="!login">
-
-
-                    <router-link class="link" :to="{name: ''} " @click="showRegister = !showRegister"><i
-                            class="bi bi-person-fill"></i><b>สมัครสมาชิก</b> <span class="position-absolute end-0 me-3">
-                            <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
+                <nav>
+                    <router-link class="views" :to="{ name: 'Home' }">
+                        <b>หน้าแรก </b>
+                        <span class="position-absolute end-0 me-3"> <i class="bi bi-chevron-right ps-5 text-end "></i>
+                        </span>
                     </router-link>
-                    <div class="container" @click="test()">
+                    <router-link class="views" :to="{ name: 'Create' }">
+                        <b> ออกแบบเสื้อ </b> <span class="position-absolute end-0 me-3"> <i
+                                class="bi bi-chevron-right ps-5 text-end"></i> </span>
+                    </router-link>
+
+                    <router-link class="views" :to="{ name: 'Gallery' }"
+                        v-bind:class="[isActiveGallery ? 'shadow bg-warning' : 'none']"><b> Design Gallery </b> <span
+                            class="position-absolute end-0 me-3"> <i class="bi bi-chevron-right ps-5 text-end"></i>
+                        </span>
+                    </router-link>
+
+                    <router-link class="link" :to="{ name: '' }" @click="showPayment = !showPayment"><b>วิธีการชำระเงิน
+                        </b>
+                        <span class="position-absolute end-0 me-3"> <i class="bi bi-chevron-right ps-5 text-end"></i>
+                        </span>
+                    </router-link>
+
+
+                    <div v-if="!login">
+
+
+                        <router-link class="link" :to="{ name: '' }" @click="showRegister = !showRegister"><i
+                                class="bi bi-person-fill"></i><b>สมัครสมาชิก</b> <span
+                                class="position-absolute end-0 me-3">
+                                <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
+                        </router-link>
+                        <div class="container" @click="test()">
+                        </div>
+                        <router-link class="link" :to="{ name: '' }" @click="showLogin = !showLogin" name="showLogin"
+                            id="showLogin">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            <b>เข้าสู่ระบบ</b><span class="position-absolute end-0 me-3">
+                                <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
+                        </router-link>
+
                     </div>
-                    <router-link class="link" :to="{name: ''}" @click="showLogin = !showLogin" name="showLogin"
-                        id="showLogin">
-                        <i class="bi bi-box-arrow-in-right"></i>
-                        <b>เข้าสู่ระบบ</b><span class="position-absolute end-0 me-3">
-                            <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
-                    </router-link>
+                    <div v-else>
 
-                </div>
-                <div v-else>
-                    <router-link class="link" :to="{name: ''}" @click="showLogin = !showLogin" name="showLogin"
-                        id="showLogin">
-                        <i class="bi bi-person"></i>
-                        <b class=""> ชื่อผู้ใช้งาน </b><span class="position-absolute end-0 me-3">
-                            <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
-                    </router-link>
+                        <!--
+                        <router-link class="link" :to="{ name: '' }" @click="showLogin = !showLogin" name="showLogin"
+                            id="showLogin">
+                            <i class="bi bi-person"></i>
+                            <b class=""> ชื่อผู้ใช้งาน </b><span class="position-absolute end-0 me-3">
+                                <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
+                        </router-link>
 
+                            -->
+                        <router-link class="views" :to="{ name: 'Profile', params: { id: '' } }">
+                            <i class="bi  bi-file-earmark-person"></i>
+                            <b> โปรไฟล์ </b><span class="position-absolute end-0 me-3">
+                                <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
+                        </router-link>
 
-                    <router-link class="link" :to="{name: ''}" @click="showEdit = true" name="logOut" id="logOut">
-                        <i class="bi  bi-file-earmark-person"></i>
-                        <b> โปรไฟล์ </b><span class="position-absolute end-0 me-3">
-                            <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
-                    </router-link>
-
-                    <router-link class="link" :to="{name: ''}" @click="logOut()" name="logOut" id="logOut">
-                        <i class="bi  bi-wallet2"></i>
-                        <b> รายการรอชำระเงิน </b><span class="position-absolute end-0 me-3">
-                            <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
-                    </router-link>
+                        <router-link class="link" :to="{ name: '' }" @click="logOut()" name="logOut" id="logOut">
+                            <i class="bi  bi-wallet2"></i>
+                            <b> รายการรอชำระเงิน </b><span class="position-absolute end-0 me-3">
+                                <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
+                        </router-link>
 
 
 
-                    <router-link class="link" :to="{name: ''}" @click="logOut()" name="logOut" id="logOut">
-                        <i class="bi  bi-card-list"></i>
-                        <b> รายการที่ออกแบบ </b><span class="position-absolute end-0 me-3">
-                            <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
-                    </router-link>
+                        <router-link class="link" :to="{ name: '' }" @click="logOut()" name="logOut" id="logOut">
+                            <i class="bi  bi-card-list"></i>
+                            <b> รายการที่ออกแบบ </b><span class="position-absolute end-0 me-3">
+                                <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
+                        </router-link>
 
 
-                    <router-link class="link" :to="{name: ''}" @click="logOut()" name="logOut" id="logOut">
-                        <i class="bi bi-credit-card-2-front"></i>
-                        <b> รายการขาย </b><span class="position-absolute end-0 me-3">
-                            <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
-                    </router-link>
+                        <router-link class="link" :to="{ name: '' }" @click="logOut()" name="logOut" id="logOut">
+                            <i class="bi bi-credit-card-2-front"></i>
+                            <b> รายการขาย </b><span class="position-absolute end-0 me-3">
+                                <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
+                        </router-link>
 
 
 
-                    <router-link class="link" :to="{name: ''}" @click="logOut()" name="logOut" id="logOut">
-                        <i class="bi bi bi-shop"></i>
-                        <b> ดูแบบเสื้อที่มีการสั่งซื้อ </b><span class="position-absolute end-0 me-3">
-                            <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
-                    </router-link>
+                        <router-link class="link" :to="{ name: '' }" @click="test_c = true" name="logOut" id="logOut">
+                            <i class="bi bi bi-shop"></i>
+                            <b> ดูแบบเสื้อที่มีการสั่งซื้อ </b><span class="position-absolute end-0 me-3">
+                                <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
+                        </router-link>
 
-                    <router-link class="link" :to="{name: ''}" @click="showLogout = true" name="logOut" id="logOut">
-                        <i class="bi bi-box-arrow-in-left"></i>
-                        <b> ออกจากระบบ </b><span class="position-absolute end-0 me-3">
-                            <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
-                    </router-link>
+                        <router-link class="link" :to="{ name: '' }" @click="showLogout = true" name="logOut"
+                            id="logOut">
+                            <i class="bi bi-box-arrow-in-left"></i>
+                            <b> ออกจากระบบ </b><span class="position-absolute end-0 me-3">
+                                <i class="bi bi-chevron-right ps-5 text-end"></i> </span>
+                        </router-link>
 
-                </div>
+
+                      
+                    </div>
+                </nav>
             </div>
         </div>
     </Transition>
@@ -103,10 +115,11 @@
 
     <nav class="navbar  bg-dark pb-0 ">
         <div style="height: 6px;">Thynne</div>
-        <div class="container-fluid bg-white ">
+        <div class="container-fluid bg-white shadow">
 
             <div class="branding">
-                <i class="bi bi-egg-fried fa-1x"></i>
+                
+                <img src="../assets/MBY.png" alt="Bootstrap" width="120" height="32">
             </div>
 
             <div class="d-flex">
@@ -122,25 +135,28 @@
             </div>
         </div>
     </nav>
+    <br />
 
 
 
+    <nav class="fixed-bottom menubottom text-center ">
 
-    <nav class="fixed-bottom menubottom text-center bg-dark">
+
         <div class="row">
-            <div class="col p-3">
-                <router-link class="link" :to="{name: 'Home'}">
-                    <text class="text-warning"><b> ALL PORDUCTS </b></text>
-                </router-link>
-            </div>
-            <div class="col bg-warning p-3">
+
+            <router-link class="col p-3 link menu_bt" :to="{ name: 'Home' }">
+                <text><b>ALL PORDUCTS</b></text>
+            </router-link>
 
 
-                <router-link class="link" :to="{name: 'Create'}">
-                    <text class="text-dark"><b> Create </b></text>
-                </router-link>
 
-            </div>
+            <router-link class="col p-3 link menu_bt" :to="{ name: 'Create' }">
+                <text><b>CREATE</b></text>
+            </router-link>
+
+
+
+
         </div>
     </nav>
 
@@ -156,7 +172,7 @@
     <Login_ModalVue :showModal=showLogin @close="click_event" @login="check_login_" />
     <Payment_Modal :showModal=showPayment @close="click_event" />
     <Cart_Modal :showModal=showCart @close="click_event" />
-    <Edit_Modal :showModal=showEdit @close="click_event" />
+    <AlertVue :showAlert=test_c></AlertVue>
 </template>
 <script>
 
@@ -166,19 +182,44 @@ import Register_ModalVue from './Register_Modal.vue';
 import Login_ModalVue from './Login_Modal.vue';
 import Payment_Modal from './Payment/Payment_Modal.vue';
 import Cart_Modal from './Payment/Cart_modal.vue';
-
+import AlertVue from './Alert.vue';
 import Edit_Modal from './Menu_bar/Edit_Modal.vue';
 import { notify } from "@kyvg/vue3-notification";
+
 export default {
     name: "menubar",
     components: {
         Register_ModalVue,
         Login_ModalVue,
         Payment_Modal,
-        Cart_Modal, Logout_ModalVue, Edit_Modal
+        Cart_Modal, Logout_ModalVue, AlertVue
     },
+    computed: {
+
+
+        switchs() {
+
+
+            this.$route.name
+
+            return [this.isActive ? 'shadow bg-warning' : 'none']
+        },
+
+        name() {
+        
+            return this.$route.name
+        }
+
+
+    }
+    ,
     data() {
         return {
+            test_c: false,
+            isActiveHome: false,
+            isActiveCreate: false,
+            isActiveGallery: false,
+
             login: false,
             Menu_show: false,
 
@@ -187,17 +228,39 @@ export default {
             showLogin: false,
             showLogout: false,
             showPayment: false,
-            showCart: false
+            showCart: false,
+
+            act: null
+
         };
     },
     mounted() {
         this.check_login_()
+        let now_ = window.location.pathname.replace('/', '')
+
+
+
+
+
+
+
     },
     methods: {
+        Active(e) {
+            this.isActive = !this.isActive;
+
+
+
+
+        },
+
+        test() {
+            console.log(this.$route.name);
+        },
         check_login_() {
 
             const login = this.$cookies.get('email');
-            console.log(login);
+
             if (login != null) {
                 this.login = true;
 
@@ -215,7 +278,7 @@ export default {
         close(ev) {
 
             this.showLogout = false;
-
+            this.showEdit = false;
         },
         click_event(ev) {
 
@@ -224,7 +287,7 @@ export default {
         },
         submit() {
             this.$emit('submit', 1)
-            console.log('submit')
+          
         },
         EndNav() {
 
@@ -233,8 +296,13 @@ export default {
             this.clear()
 
 
-        }, CloseNave() {
+        }, CloseNave(ev) {
+
             document.getElementById("mySidebar").style.width = "0px"
+
+
+
+
             this.clear()
         }, clear() {
             this.showLogin = false
@@ -255,6 +323,27 @@ export default {
   Enter and leave animations can use different
   durations and timing functions.
 */
+.active {
+    color: aqua;
+}
+
+nav li:hover,
+nav .views.active {
+    background-color: #FFC000;
+    box-shadow: 0 4px 8px 0 rgba(0, 123, 255, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+}
+
+nav .active.link.menu_bt {
+    color: #FFC000;
+    background-color: #000000;
+}
+
+nav .link.menu_bt {
+    color: #000000;
+    background-color: #FFC000;
+}
+
 .slide-fade-enter-active {
     transition: all 0.2s ease-out;
 }
@@ -334,6 +423,17 @@ export default {
 }
 
 
+@media (max-height: 500px) {
+
+    .menubottom {
+
+        display: none;
+
+    }
+
+
+
+}
 
 
 .menubottom {

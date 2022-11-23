@@ -1,8 +1,8 @@
 <template>
+  <transition name="modal">
+    <div v-if="showModal">
 
-  <div v-if="showModal">
 
-    <transition name="modal">
       <div class="modal-mask">
         <div class="modal-wrapper">
           <div class="modal-container">
@@ -52,7 +52,7 @@
                   _____________________
                 </text>
                 <text>
-                  {{log}}
+                  {{ log }}
                 </text>
                 <text>
                   _____________________
@@ -73,9 +73,10 @@
           </div>
         </div>
       </div>
-    </transition>
+    </div>
+  </transition>
 
-  </div>
+
 
 
 
@@ -95,8 +96,8 @@ export default {
 
   data() {
     return {
-      
-      
+
+
       localhost: window.location.host,
       db_users: [],
       count: 0,
@@ -126,20 +127,23 @@ export default {
       let data = new FormData();
       data.append('email', this.email);
       data.append('pass', this.password);
-      axios.post(`http://${this.localhost}/services/arm_service/login`, data, {
+      
+
+      axios.post(`http://localhost:3000/services/arm_service/login`, data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       })
         .then(response => {
-          if (response.data == "success") {
+          if (response.data.state == "success") {
             this.log = 'เข้าสู่ระบบเรียบร้อย'
 
 
-        
 
+          
             this.$cookies.set("email", this.email, '24h');
             this.$cookies.set("password", this.password, '24h');
+            this.$cookies.set("_id", response.data.id, '24h');
             this.$emit('login');
             this.$emit('close');
           } else {

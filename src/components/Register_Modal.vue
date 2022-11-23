@@ -1,15 +1,15 @@
 <template>
+  <transition name="modal">
+    <div v-if="showModal">
 
-  <div v-if="showModal">
 
-    <transition name="modal">
       <div class="modal-mask">
         <div class="modal-wrapper">
           <div class="modal-container">
             <div class="modal-header ">
               <slot name="header">
                 สมัครสมาชิก
-                <span @click="showModal  = onClickClose()"><i class="bi bi-x-lg text-warning"></i> </span>
+                <span @click="showModal = onClickClose()"><i class="bi bi-x-lg text-warning"></i> </span>
               </slot>
             </div>
 
@@ -114,9 +114,10 @@
           </div>
         </div>
       </div>
-    </transition>
+    </div>
+  </transition>
 
-  </div>
+
 
 
 
@@ -138,8 +139,8 @@ export default {
 
   data() {
     return {
-      localhost: 'localhost',
-      localhosts: '103.174.191.75',
+
+      localhost: window.location.host,
       errors: [],
       email: null,
       name: null,
@@ -250,13 +251,13 @@ export default {
         data.append('name', this.name);
         data.append('last_name', this.last_name);
         data.append('pass', this.pass);
-        axios.post(`http://${this.localhost}:3000/services/arm_service/register`, data, {
+        axios.post(`http://${this.localhost}/services/arm_service/register`, data, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         })
           .then(response => {
-            console.log(response.data);
+          
             if (response.data == "success") {
               this.re_();
               this.$router.push('/')
@@ -293,7 +294,7 @@ export default {
       return false;
     },
     increaseCount(n) {
-      console.log(n)
+     
       this.count += n
     }
   }

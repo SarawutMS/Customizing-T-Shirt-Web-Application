@@ -1,7 +1,7 @@
 <template>
+    <transition name="modal">
+        <div v-if="showModal">
 
-    <div v-if="showModal">
-        <transition name="modal">
             <div class="modal-mask">
                 <div class="modal-wrapper pt-3">
                     <div class="modal-container">
@@ -13,7 +13,8 @@
 
 
 
-                                <span @click="showModal =  onClickClose()"><i class="bi bi-x-lg text-warning"></i> </span>
+                                <span @click="showModal = onClickClose()"><i class="bi bi-x-lg text-warning"></i>
+                                </span>
 
 
                             </slot>
@@ -34,9 +35,10 @@
                     </div>
                 </div>
             </div>
-        </transition>
+        </div>
+    </transition>
 
-    </div>
+
 
 
 
