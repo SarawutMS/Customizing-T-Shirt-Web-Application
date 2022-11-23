@@ -1,6 +1,6 @@
 <template>
     <transition name="modal">
-        <div v-if="showModal">
+        <div v-if="showAlert">
 
             <div class="modal-mask">
 
@@ -8,11 +8,11 @@
 
                     <div class="modal-container ">
 
-                        <div class="modal-header bg-warning p-3 shadow">
+                        <div class="modal-header p-3 shadow " :class="Type_Head">
                             <slot name="header">
 
                                 <div class="center  text-white">
-                                    คุณต้องการออกจากระบบ
+                                    {{ head_show }}
                                 </div>
                             </slot>
                         </div>
@@ -20,18 +20,23 @@
                         <div class="modal-body ">
                             <slot name="body">
 
-                                !คุณต้องการทำรายการออกจากระบบ
+                                !{{ body_show }}
                             </slot>
                         </div>
 
                         <div class="modal-footer">
                             <slot name="footer">
 
-                                <div class="btn btn-outline-secondary mx-2" @click="onClickClose">ยกเลิก</div>
+                                <div v-if="Button_Type">
+                                    <div class="btn btn-secondary mx-2" @click="Close">ยกเลิก</div>
 
-                                <div class="btn btn-outline-warning" @click="onConfirm">ออกจากระบบ</div>
+                                    <div class="btn btn-success" @click="Confirm">ตกลง</div>
+                                </div>
+                                <div v-else>
+                                    <div class="btn btn-outline-secondary  mx-2" @click="Close">ตกลง</div>
 
 
+                                </div>
                             </slot>
 
                         </div>
@@ -47,28 +52,46 @@
 
 </template>
     
-<script>
+<script scoped>
 import axios from 'axios';
 
 export default {
-    name: "logout_modal",
+    name: "Alert_show",
 
     props: {
-        showModal: Boolean
+        showAlert: Boolean,
+        data: null,
     },
 
     data() {
         return {
-            localhost: 'localhost',
-            localhosts: '103.174.191.75',
-            db_users: [],
-            count: 0,
-            state_login: false,
-            email: null,
-            password: null,
-            log: '____________________',
+           
         }
 
+    },
+    computed: {
+
+        Button_Type() {
+            if (this.data.type == "success") {
+                return true
+            } else {
+                return false
+            }
+
+
+
+        },
+        Type_Head() {
+            const type = `bg-${this.data.type}`;
+
+            return type
+        },
+        head_show() {
+            return this.data.head
+        },
+        body_show() {
+            return this.data.body
+        }
     },
     mounted() {
 
@@ -76,26 +99,14 @@ export default {
 
 
 
-
     },
     methods: {
-        clear_value() {
-            this.email = null
-            this.password = null
-            this.log = '____________________'
-        },
-        onClickClose(ev) {
-            this.$emit('close', { name: 'this.showLogOut', state: false })
-            this.clear_value()
-        },
+        Close(ev) {
 
-        onConfirm(ev) {
-            this.$cookies.remove("email");
-            this.$cookies.remove("password");
-            this.$cookies.remove("_id");
-            this.$emit('logOut')
+            this.$emit("close");
+        }, Confirm(ev) {
+            this.$emit("confirm")
         }
-
     }
 };
 </script>

@@ -23,13 +23,15 @@ const routes = [
 //})
 
 //export default router-->
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Custom from "../views/Custom.vue";
 
 import Edit from "../views/Edit.vue";
 import Create from "@/views/Create.vue";
-
+import Gallery from "@/views/Gallery.vue";
+import Profile from "@/views/Profile.vue";
+import Store from "@/views/Store.vue";
 const routes = [
   {
     path: "/",
@@ -56,6 +58,34 @@ const routes = [
       title: "Edit",
     },
 
+
+  },
+  {
+    path: '/profile/:id?',
+    name: 'Profile',
+    component: Profile,
+    meta: {
+      title: "Profile",
+    }
+  },
+
+
+  {
+    path: '/store/:id',
+    name: 'Store',
+    component: Store,
+    meta: {
+      title: "Store",
+    }
+  },
+  {
+    path: '/gallery',
+    name: 'Gallery',
+    component: Gallery,
+    meta: {
+      title: "Gallery",
+    },
+
   },
   {
     path: '/create',
@@ -69,8 +99,10 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   routes,
+  linkActiveClass: "active", // active class for non-exact links.
+  linkExactActiveClass: "active" // active class for *exact* links.
 });
 router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title}`;
